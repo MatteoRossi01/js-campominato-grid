@@ -11,26 +11,35 @@ body {
 }
 
 .container {
-    height: 450px;
-    width: 452px;
-    border: 1px solid #000;
+    width: 450px;
+    height: 452px;
     margin-top: 80px;
 }
 
 .box {
     border: 1px solid black;
-    width: calc(100% / 10);
-    height: calc(100% / 10);
     float: left;
     display: flex;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
-}
-
-.number {
-    align-self: center;
 }
 
 .clicked {
     background-color: #6495ED;
+}
+
+.dieci {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+
+.nove {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+.sette {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
 }

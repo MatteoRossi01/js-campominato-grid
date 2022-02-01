@@ -1,77 +1,60 @@
 
-const start = document.getElementById('start');
+/* Funzione che gestisce il grado di difficoltà*/
+function setDifficult(level) {
+    let caselle = 0;
+    let numeroCaselle = '';
 
-let difficolta = document.getElementById('difficolta').value;
+    if (level == "easy") {
+        caselle = 100;
+        numeroCaselle = "dieci";
+    } else if (level == "normal") {
+        caselle = 81;
+        numeroCaselle = "nove";
+    } else if (level == "hard") {
+        caselle = 49;
+        numeroCaselle = "sette";
+    } else {
+        alert("Impostare una difficoltà per iniziare il gioco!")
+    }   
 
-start.addEventListener('click', 
+    return [caselle, numeroCaselle];
+}
 
-    function selectDifficult() {
+const container = document.getElementById('container');
 
-        if (difficolta == "easy") {
+/* Funzione usata per la creazione della grid */
+function createGrid(container, caselle, numeroCaselle) {
+    
+    for (let i=1; i<=caselle; i++) {
 
-            const container = document.getElementById('container');
+        /* Creo gli elementi della griglia */
+        const node = document.createElement('div');
+        node.classList.add("box")
+        node.classList.add(numeroCaselle)
 
-            for (let i=1; i<=100; i++) {
+        container.appendChild(node)
 
-                /* Creo gli elementi della griglia */
-                const node = document.createElement('div');
-                node.classList.add('box')
-                node.innerHTML += "<span class=number>"+i+"</span>";
+        let numero = document.createTextNode(i);
+        node.appendChild(numero);
 
-                /* Aggiungo l'evento per il click */
-                node.addEventListener('click', function() {
-                    console.log(this);
-                    this.classList.add('clicked');
-                });
-
-                container.appendChild(node);
-
-            }
-
-        } else if (difficolta == 'normal') {
-
-            const container = document.getElementById('container');
-
-            for (let i=1; i<=81; i++) {
-
-                /* Creo gli elementi della griglia */
-                const node = document.createElement('div');
-                node.classList.add('box')
-                node.innerHTML += "<span class=number>"+i+"</span>";
-
-                /* Aggiungo l'evento per il click */
-                node.addEventListener('click', function() {
-                    console.log(this);
-                    this.classList.add('clicked');
-                });
-
-                container.appendChild(node);
-
-            }
-
-        } else if (difficolta == 'hard') {
-
-            const container = document.getElementById('container');
-
-            for (let i=1; i<=49; i++) {
-
-                /* Creo gli elementi della griglia */
-                const node = document.createElement('div');
-                node.classList.add('box')
-                node.innerHTML += "<span class=number>"+i+"</span>";
-
-                /* Aggiungo l'evento per il click */
-                node.addEventListener('click', function() {
-                    console.log(this);
-                    this.classList.add('clicked');
-                });
-
-                container.appendChild(node);
-
-            }
-
-        }
+        node.addEventListener('click', function() {
+            console.log(this);
+            this.classList.add('clicked');
+        });
 
     }
+    
+}
 
-)
+const start = document.getElementById('start');
+start.addEventListener("click", function(){
+
+    document.getElementById("container").innerHTML = "";
+
+    let level = document.getElementById("difficolta").value;
+
+    setDifficult(level);
+
+    createGrid(container, setDifficult(level)[0], setDifficult(level)[1]);
+
+});
